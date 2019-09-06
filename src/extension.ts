@@ -50,15 +50,15 @@ async function insertKey(key: string) {
                         { cwd: path.dirname(editor.document.uri.fsPath) },
                         (code, stdout, stderr) => {
                             if (code === 0) {
-                                console.log(stdout);
-                                console.log(stderr);
+                                console.log("stdout:", stdout);
+                                console.log("stderr:", stderr);
                                 console.log(LOGGING_PREFIX, "Successfully uploaded key:", enteredKey);
                                 vscode.window.showInformationMessage(`Successfully uploaded key: "${enteredKey}"`);
                             } else {
-                                console.error(stdout);
-                                console.error(stderr);
+                                console.error("stdout:", stdout);
+                                console.error("stderr:", stderr);
                                 console.error(LOGGING_PREFIX, "Error while adding key:", enteredKey);
-                                vscode.window.showErrorMessage(`Error while adding key: "${enteredKey}"`);
+                                vscode.window.showErrorMessage(`Error while adding key: "${enteredKey}"`, stderr);
                             }
                         }
                     );

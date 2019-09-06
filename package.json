@@ -1,9 +1,13 @@
 {
     "name": "texterify",
-    "displayName": "texterify",
-    "description": "",
+    "displayName": "Texterify",
+    "description": "An extension for VS Code to interact with Texterify.",
     "version": "0.0.1",
-    "publisher": "Christoph",
+    "publisher": "texterify",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chrztoph/texterify-vsc"
+    },
     "engines": {
         "vscode": "^1.23.0"
     },
