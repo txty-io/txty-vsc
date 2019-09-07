@@ -44,15 +44,15 @@
         "@types/node": "^12.7.4",
         "tslint": "^5.19.0",
         "typescript": "^3.6.2",
-        "vscode": "^1.1.36"
-    },
-    "dependencies": {
+        "vscode": "^1.1.36",
         "@types/lodash": "^4.14.138",
         "@types/nconf": "^0.10.0",
         "@types/shelljs": "^0.8.5",
+        "tslint-microsoft-contrib": "^6.2.0"
+    },
+    "dependencies": {
         "lodash": "^4.17.15",
         "nconf": "^0.10.0",
-        "shelljs": "^0.8.3",
-        "tslint-microsoft-contrib": "^6.2.0"
+        "shelljs": "^0.8.3"
     }
 }
