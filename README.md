@@ -15,7 +15,7 @@ For more information about Texterify visit https://github.com/chrztoph/texterify
 
 ## Installation
 
-This extension uses the `texterify` CLI program. To install it run
+This extension uses the `texterify` CLI program (https://github.com/chrztoph/texterify-cli). To install it run
 ```sh
 npm install -g texterify
 ```
@@ -44,5 +44,16 @@ Place a `texterify.json` file in the root directory of your VSC project.
     "project_id": "6fa821e2-1e7e-4ec6-9b0f-9949ce83b160",
     "export_directory": "translations"
 }
-
 ```
+
+## Contributing
+
+Want to help build Texterify VSC Extension?
+
+We are happy about every help.
+
+## License
+
+[![License](https://img.shields.io/github/license/chrztoph/texterify-vsc.svg)](https://img.shields.io/github/license/chrztoph/texterify-vsc.svg)
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
