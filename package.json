@@ -4,7 +4,7 @@
     "description": "An extension for VS Code to interact with Texterify.",
     "version": "0.0.2",
     "publisher": "texterify",
-    "icon": "./logo.png",
+    "icon": "images/logo.png",
     "repository": {
         "type": "git",
         "url": "https://github.com/chrztoph/texterify-vsc"
@@ -16,19 +16,19 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:insert.key",
+        "onCommand:add.key",
         "onCommand:download.keys"
     ],
     "main": "./out/extension",
     "contributes": {
         "commands": [
             {
-                "command": "insert.key",
-                "title": "Texterify: Insert Key"
+                "command": "add.key",
+                "title": "Texterify: Add key"
             },
             {
                 "command": "download.keys",
-                "title": "Texterify: Download Keys"
+                "title": "Texterify: Download keys"
             }
         ]
     },

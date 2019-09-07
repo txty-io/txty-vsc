@@ -3,7 +3,7 @@ import * as _ from "lodash";
 import * as path from "path";
 import * as shelljs from "shelljs";
 import * as vscode from "vscode";
-import { locales } from "./locales";
+import { translations } from "./translations";
 
 const LOGGING_PREFIX: string = "[EXTENSION]";
 
@@ -11,7 +11,7 @@ const LOGGING_PREFIX: string = "[EXTENSION]";
 // Your extension is activated the very first time the command is executed.
 export function activate(context: vscode.ExtensionContext) {
     const commands = [
-        vscode.commands.registerCommand("insert.key", insertKey),
+        vscode.commands.registerCommand("add.key", addKey),
         vscode.commands.registerCommand("download.keys", downloadKeys)
     ];
 
@@ -25,7 +25,7 @@ export function deactivate() {
     // :(
 }
 
-async function insertKey(key: string) {
+async function addKey(key: string) {
     const editor = vscode.window.activeTextEditor;
     if (editor) {
         // Get the new key from the user.
@@ -41,7 +41,7 @@ async function insertKey(key: string) {
 
                     const selections = editor.selections;
                     for (const selection of selections) {
-                        console.log(LOGGING_PREFIX, "Inserting key:", enteredKey);
+                        console.log(LOGGING_PREFIX, "Adding key:", enteredKey);
                         edit.insert(selection.start, enteredKey as string);
                     }
 
@@ -68,7 +68,7 @@ async function insertKey(key: string) {
             }
         });
     } else {
-        vscode.window.showErrorMessage(locales["error.no_active_editor"]);
+        vscode.window.showErrorMessage(translations["error.no_active_editor"]);
     }
 }
 
