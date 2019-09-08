@@ -46,7 +46,7 @@ async function addKey(key: string) {
                     }
 
                     shelljs.exec(
-                        `texterify add ${enteredKey} --project-path ${vscode.workspace.rootPath}`,
+                        `texterify add "${enteredKey}" --project-path ${vscode.workspace.rootPath}`,
                         { cwd: path.dirname(editor.document.uri.fsPath) },
                         (code, stdout, stderr) => {
                             if (code === 0) {
