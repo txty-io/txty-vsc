@@ -2,7 +2,7 @@
     "name": "texterify",
     "displayName": "Texterify",
     "description": "An extension for VS Code to interact with Texterify.",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "publisher": "texterify",
     "icon": "images/logo.png",
     "repository": {
