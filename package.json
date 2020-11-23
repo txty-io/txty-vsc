@@ -17,6 +17,7 @@
     ],
     "activationEvents": [
         "onCommand:add.key",
+        "onCommand:add.key.with.translation",
         "onCommand:download.keys"
     ],
     "main": "./out/extension",
@@ -25,6 +26,10 @@
             {
                 "command": "add.key",
                 "title": "Texterify: Add key"
+            },
+            {
+                "command": "add.key.with.translation",
+                "title": "Texterify: Add key with translation"
             },
             {
                 "command": "download.keys",

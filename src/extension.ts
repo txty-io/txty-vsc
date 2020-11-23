@@ -11,7 +11,8 @@ const LOGGING_PREFIX: string = "[EXTENSION]";
 // Your extension is activated the very first time the command is executed.
 export function activate(context: vscode.ExtensionContext) {
     const commands = [
-        vscode.commands.registerCommand("add.key", addKey),
+        vscode.commands.registerCommand("add.key", addKeyCommand),
+        vscode.commands.registerCommand("add.key.with.translation", addKeyWithTranslationCommand),
         vscode.commands.registerCommand("download.keys", downloadKeys)
     ];
 
@@ -25,11 +26,34 @@ export function deactivate() {
     // :(
 }
 
-async function addKey(key: string) {
+async function addKeyCommand() {
+    await addKey();
+}
+
+async function addKeyWithTranslationCommand() {
+    await addKey({
+        withTranslation: true
+    });
+}
+
+async function addKey(options?: {
+    withTranslation: boolean;
+}) {
     const editor = vscode.window.activeTextEditor;
     if (editor) {
         // Get the new key from the user.
-        let enteredKey = await vscode.window.showInputBox();
+        let enteredKey = await vscode.window.showInputBox({
+            prompt: "Enter the key name",
+            placeHolder: "Key name"
+        });
+
+        let translation: string | undefined;
+        if (options && options.withTranslation) {
+            translation = await vscode.window.showInputBox({
+                prompt: "Enter the translation for the default language",
+                placeHolder: "Translation for default language"
+            });
+        }
 
         // Insert the new key in the editor.
         editor.edit(async (edit) => {
@@ -42,11 +66,15 @@ async function addKey(key: string) {
                     const selections = editor.selections;
                     for (const selection of selections) {
                         console.log(LOGGING_PREFIX, "Adding key:", enteredKey);
-                        edit.insert(selection.start, enteredKey as string);
+                        edit.insert(selection.start, enteredKey);
                     }
 
+                    const command = options && options.withTranslation && translation ?
+                        `texterify add "${enteredKey}" "${translation}" --project-path ${vscode.workspace.rootPath}` :
+                        `texterify add "${enteredKey}" --project-path ${vscode.workspace.rootPath}`;
+
                     shelljs.exec(
-                        `texterify add "${enteredKey}" --project-path ${vscode.workspace.rootPath}`,
+                        command,
                         { cwd: path.dirname(editor.document.uri.fsPath) },
                         (code, stdout, stderr) => {
                             if (code === 0) {
