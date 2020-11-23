@@ -69,7 +69,9 @@ async function addKey(options?: {
                         edit.insert(selection.start, enteredKey);
                     }
 
-                    const command = options && options.withTranslation && translation ?
+                    const addTranslation = options && options.withTranslation && translation;
+
+                    const command = addTranslation ?
                         `texterify add "${enteredKey}" "${translation}" --project-path ${vscode.workspace.rootPath}` :
                         `texterify add "${enteredKey}" --project-path ${vscode.workspace.rootPath}`;
 
@@ -81,12 +83,16 @@ async function addKey(options?: {
                                 console.log("stdout:", stdout);
                                 console.log("stderr:", stderr);
                                 console.log(LOGGING_PREFIX, "Successfully uploaded key:", enteredKey);
-                                vscode.window.showInformationMessage(`Successfully uploaded key: "${enteredKey}"`);
+                                if (addTranslation) {
+                                    vscode.window.showInformationMessage(`Successfully uploaded key "${enteredKey}" with translation "${translation}"`);
+                                } else {
+                                    vscode.window.showInformationMessage(`Successfully uploaded key "${enteredKey}"`);
+                                }
                             } else {
                                 console.error("stdout:", stdout);
                                 console.error("stderr:", stderr);
-                                console.error(LOGGING_PREFIX, "Error while adding key:", enteredKey);
-                                vscode.window.showErrorMessage(`Error while adding key: "${enteredKey}"`, stderr);
+                                console.error(LOGGING_PREFIX, `Failed to add key "${enteredKey}"`, code, stderr);
+                                vscode.window.showErrorMessage(`Failed to add key "${enteredKey}"`, stderr);
                             }
                         }
                     );
@@ -106,15 +112,15 @@ async function downloadKeys() {
         {},
         (code, stdout, stderr) => {
             if (code === 0) {
-                console.log(stdout);
-                console.log(stderr);
+                console.log("stdout:", stdout);
+                console.log("stderr:", stderr);
                 console.log(LOGGING_PREFIX, "Successfully downloaded keys.");
                 vscode.window.showInformationMessage("Successfully downloaded keys.");
             } else {
-                console.error(stdout);
-                console.error(stderr);
-                console.error(LOGGING_PREFIX, "Error while pulling keys.");
-                vscode.window.showErrorMessage("Error while pulling keys.");
+                console.error("stdout:", stdout);
+                console.error("stderr:", stderr);
+                console.error(LOGGING_PREFIX, `Failed to download keys`, code, stderr);
+                vscode.window.showErrorMessage(`Failed to download keys`, stderr);
             }
         }
     );

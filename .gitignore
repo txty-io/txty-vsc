@@ -6,3 +6,4 @@ yarn-error.log
 .vscode
 package-lock.json
 texterify.json
+extension-test
